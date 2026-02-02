@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SaleExpress</title>
+    <link rel="website icon" href="{{ url_for('static', filename='img/logosite/SaleExpress Logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="navbar-container">
+
+            <!-- Linha 1: Pesquisa -->
+
+            <div class="pesquisa">
+                <input class="pesquisa-text" type="search" placeholder="Faça sua pesquisa">
+                <a class="pesquisa-btn" href="#">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+
+            <div class="alinhamento-icons">
+                <div class="icones-topo">
+                    <div class="user-navbar">
+                        <a href="{{ url_for('userSale') }}" class="user-navbar">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </div>
+
+                    <button class="noti">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+
+                    <div class="btn-dark-catalogo">
+                        <button id="btn-dark" class="btn-dark"></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <section class="notifi">
+                <ul>
+                    <div class="produtosNotifi">
+                        <i class="fa-solid fa-bell"></i><h3>Notificações</h3>
+                    </div>
+                    <li>
+                        <a href="{{ url_for('produto', id=3) }}">
+                            <div class="produtosNotifi">
+                                <img src="{{ url_for('static', filename='img/produtos/img1.1.jpg') }}" width="50px">
+
+                                <p>Produto com 15% de Desconto!</p>
+                            </div>
+                        </a>
+                        <hr>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('produto', id=15) }}">
+                            <div class="produtosNotifi">
+                                <img src="{{ url_for('static', filename='img/produtos/img19.jpg') }}" width="50px">
+                                <p>Produtos que talvez você tenha interesse</p>
+                            </div>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="{{ url_for('produto', id=13) }}">
+                            <div class="produtosNotifi">
+                                <img src="{{ url_for('static', filename='img/produtos/img15.jpg') }}" width="50px">
+                                <p>Venha conferir: Mi Band 10 GLOBAL</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+
+            <!-- Linha 2: Filtros -->
+
+
+            <div class="btn-nav">
+                <a href="#" class="nav-btn">Todos</a>
+                <a href="#" class="nav-btn">Eletronicos</a>
+                <a href="#" class="nav-btn">Vestuario</a>
+                <a href="#" class="nav-btn">Tenis</a>
+                <a href="#" class="nav-btn">Masculino</a>
+                <a href="#" class="nav-btn">Feminino</a>
+                <a href="#" class="nav-btn">Esportes</a>
+            </div>
+
+
+
+        </div>
+        <!--navbar container-->
+
+    </nav>
+
+
+
+    <script src="{{ url_for('static', filename='js/catalogo.js') }}"></script>
+
+    <!-- Sidebar-->
+
+    <nav id="sidebar">
+        <div id="sidebar_content">
+            <button id="toggleSidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div id="user">
+                <img src="{{ url_for('static', filename='img/img12.jpg') }}" id="user_avatar">
+
+                <div id="user_infos">
+                    <span class="item-descricao">{{ nome }}</span>
+                    <span class="item-descricao">{{ email }}</span>
+                </div>
+            </div>
+
+            <ul id="side_items">
+                <li class="side-item active">
+                    <a href="catalogo.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="item-descricao">Catalogo</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="{{ url_for( 'carrinho') }}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="item-descricao">Carrinho</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="{{ url_for( 'chat') }}">
+                        <i class="fa-solid fa-comments"></i>
+                        <span class="item-descricao">Chat</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="vender.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="item-descricao">Vender um produto</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="comprasR.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="item-descricao">Compras ja realizadas</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="avaliar.html">
+                        <i class="fa-solid fa-star"></i>
+                        <span class="item-descricao">Avaliar produto</span>
+                    </a>
+                </li>
+
+
+                <li class="side-item">
+                    <a href="{{ url_for('config') }}">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="item-descricao">Configurações</span>
+                    </a>
+                </li>
+
+            </ul>
+
+
+        </div>
+
+        <div id="logot">
+                <a href="{{ url_for('logout') }}" id="logoy_btn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="item-descricao">Logout</span>
+            </a>
+        </div>
+
+    </nav>
+
+    <!-- Banner -->
+
+    <section id="banner">
+        <div class="banner-banner">
+            <h1 class="bannerH1">SaleExpress Seja Bem Vindo!</h1>
+            <p>O lugar onde se encontra diversos produtos de otima qualidade </p>
+            <button class="btnbanner">Sobre nós</button>
+        </div>
+
+        <!-- Sobre Nós -->
+        <section class="bannerLayout">
+            <ul>
+
+                <li>
+                    <h1>Sobre Nós</h1>
+                </li>
+                <li>
+                    <p>Seja Bem vindo ao SaleExpress, este site de vendas foi desenvolvido pelo Grupo_03, e busca entregar qualidade, segurança, transparencia e confiança para nossos clientes.</p>
+                    <p>Este site também procura ajudar pequenos vendedores a começarem seu negócio e ajudar grandes e/ou pequenas empresas com melhor cominicação entre si</p>
+                    <p>Neste site, você encontrará diversos produtos como: cosméticos, eletrônicos, tênis, itens esportivos, e muito mais!</p> <hr>
+                    <p>Qualquer problema encontrado durante sua navegação, entrar em contato: www.reclamesaleexpress.com</p>
+                </li>
+            </ul>
+        </section>
+
+    </section>
+
+
+
+    <div class="container-filho">
+
+        <!--TENIS-->
+
+        <div class="produto" data-category="tenis">
+            <img src="{{ url_for('static', filename='img/produtos/img1.jpg') }}">
+            <div>
+                <h1>Tenis Nike</h1>
+                <h4>Tênis Nike Revolution 7, tenis bom e confortavel.</h4>
+                <span>R$300,00</span>
+                <a href="{{ url_for('produto', id=1) }}">
+                    <div class="btn-catalogo">
+                        <button class="btn">Comprar</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="produto" data-category="tenis">
+        <img src="{{ url_for('static', filename='img/produtos/img21.jpg') }}">
+
+        <div>
+            <h1>Tenis Nike</h1>
+            <h4>Tênis Nike Air force 1, tenis bom e confortavel.</h4>
+            <span>R$759,99</span>
+                <a href="{{ url_for('produto', id=2) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="produto" data-category="tenis">
+        <img src="{{ url_for('static', filename='img/produtos/img1.1.jpg') }}">
+        <div>
+            <h1>Tênis do São Paulo</h1>
+            <h4>TENIS DO SPFC NEW 2025
+                TENIS 480 Low São Paulo</h4>
+            <span>R$ 400,99</span>
+                <a href="{{ url_for('produto', id=3) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!--MASCULINOS-->
+
+    <div class="produto" data-category="masculino">
+        <img src="{{ url_for('static', filename='img/produtos/img2.jpg') }}">
+        <div>
+            <h1>Camisa nike</h1>
+            <h4>Camisa da nike, boa, estilosa e confortavel, otima para se usar no dia a dia.</h4>
+            <span>R$ 100,00</span>
+            <a href="{{ url_for('produto', id=4) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="masculino">
+        <img src="{{ url_for('static', filename='img/produtos/img20jpg.jpg') }}">
+        <div>
+            <h1>Camisa do São Paulo</h1>
+            <h4>Camisa jogador do São Paulo Futebol Clube 2025</h4>
+            <span>R$ 350,99</span>
+                <a href="{{ url_for('produto', id=5) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="masculino">
+        <img src="{{ url_for('static', filename='img/produtos/jaqueta brnca.jpg') }}">
+        <div>
+            <h1>Jaqueta do São Paulo</h1>
+            <h4>JAQUETA DO SPFC NEW 2025</h4>
+            <span>R$ 499,99</span>
+                <a href="{{ url_for('produto', id=6) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="produto" data-category="masculino">
+        <img src="{{ url_for('static', filename='img/produtos/img3.jpg') }}">
+        <div>
+            <h1>Shorts preto nike</h1>
+            <h4>Shorts da nike, bom, estiloso e confortavel, otimo para se usar no dia a dia.</h4>
+            <span>R$ 80,00</span>
+                <a href="{{ url_for('produto', id=7) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!--ELETRONICOS-->
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img17.jpg') }}" data-category="eletronicos">
+        <div>
+            <h1>Teclado Gamer Wooting 60he+</h1>
+            <h4>Rapid Trigger Distância De Ativação (Ajustável): 0.1 Mm - 4.0 Mm 
+            </h4>
+            <span>R$ 2.313,19</span>
+                <a href="{{ url_for('produto', id=8) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img5.jpg') }}">
+        <div>
+            <h1>Smartphone Samsung Galaxy S24 Ultra, Galaxy AI, Selfie de 12MP, Tela de 6.8" 1-120Hz, 512GB, 12GB RAM -
+                Titânio Cinza.</h1>
+            <h4>Smartphone Samsung Galaxy S24, Ultra, Galaxy AI </h4>
+            <span>R$ 6.929,10</span>
+                <a href="{{ url_for('produto', id=9) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+<img src="{{ url_for('static', filename='img/produtos/img6.jpg') }}">        <div>
+            <h1>Monitor ThinkVision 21.5" T22i-30 FHD (1920x1080) 60Hz.</h1>
+            <h4>Configuração:
+                Monitor de 21,5"
+                Resolução FHD de 1920 x 1080
+                Energy Star 8.0
+                </h4>
+            <span>R$ 865,99</span>
+            <a href="{{ url_for('produto', id=10) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img7.jpg') }}">
+        <div>
+            <h1>Fone de Ouvido Sem Fio, JBL, Bluetooth, Wave Beam 2, Intra Auricular, Sem Fio, Resistente À Água e
+                Poeira - Preto.</h1>
+            <h4>Fone JBL, bom e confortavel</h4>
+            <span>R$ 290,00</span>
+            <a href="{{ url_for('produto', id=11) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img8.jpg') }}">
+        <div>
+            <h1>Microfone Condensador HyperX QuadCast S – RGB Personalizável, Toque para Silenciar, Antivibração, Filtro
+                Pop, 4 Padrões Polares, USB, para Streaming e Criação de Conteúdo, Preto.</h1>
+            <h4>Iluminação RGB radiante com efeitos dinâmicos: Personalize a iluminação RGB.</h4>
+            <span>R$ 850,00</span>
+            <a href="{{ url_for('produto', id=12) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img15.jpg') }}">
+        <div>
+            <h1>Mi Band 10 GLOBAL</h1>
+            <h4>Relógio Mi Band 10 (GLOBAL) Inteligente, Tela AMOLED 1,72, Relógio inteligente</h4>
+            <span>R$ 375,00</span>
+            <a href="{{ url_for('produto', id=13) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+<img src="{{ url_for('static', filename='img/produtos/img16.jpg') }}">        <div>
+            <h1>ATTACK SHARK X11</h1>
+            <h4>ATTACK SHARK X11 Mouse sem fio leve, 62g, RGB, 22K DPI, sensor
+                PAW3311</h4>
+            <span>R$ 229,00</span>
+            <a href="{{ url_for('produto', id=14) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img19.jpg') }}">
+        <div>
+            <h1>Notebook Acer Nitro V15</h1>
+            <h4> V15 ANV15-51-73E9 Intel Core i7-13620H, 16GB RAM, 512GB SSD, NVIDIA RTX 3050</h4>
+            <span>R$ 5.199,00</span>
+            <a href="{{ url_for('produto', id=15) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="eletronicos">
+        <img src="{{ url_for('static', filename='img/produtos/img23.jpg') }}">
+        <div>
+            <h1>Nintendo Switch 2</h1>
+            <h4>Bundle Nintendo Switch 2 + Jogo Digital Mario Kart World – Modelo Nacional</h4>
+            <span>R$ 4.700,00</span>
+            <a href="{{ url_for('produto', id=16) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!--FEMININOS-->
+
+    <div class="produto" data-category="feminino">
+        <img src="{{ url_for('static', filename='img/produtos/melu.jpg') }}">
+        <div>
+            <h1>Rímel melu Rosa</h1>
+            <h4>MÁSCARA PARA CÍLIOS PEEL OFF MELU RR515 SELFIE RUBYROSE</h4>
+            <span>R$ 20,00</span>
+            <a href="{{ url_for('produto', id=17) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="produto" data-category="feminino">
+        <img src="{{ url_for('static', filename='img/produtos/base-tratamento.jpg') }}">
+        <div>
+            <h1>Bauny - Base de Tratamento- 9ml</h1>
+            <h4>A base de tratamento da Bauny tem a presença de nonychosine com metionina.</h4>
+            <span>R$ 18,90</span>
+            <a href="{{ url_for('produto', id=18) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="feminino">
+        <img src="{{ url_for('static', filename='img/produtos/Theo.jpg') }}"><mg src="img/Theo.jpg" alt=""></mg>i
+        <div>
+            <h1>Bauny Theo - Esmalte Cremoso - 9ml</h1>
+            <h4>Quente como um beijo cinematográfico. Quente como um dos nomes queridinhos.</h4>
+            <span>R$ 18,90</span>
+            <a href="{{ url_for('produto', id=19) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!--ESPORTES-->
+
+    <div class="produto" data-category="esportes">
+        <img src="{{ url_for('static', filename='img/produtos/kimono.jpg') }}">
+        <div>
+            <h1>Kimono Karate Adidas Club K220cnl - Adulto</h1>
+            <h4>Kimono Karatê adidas Club K220C com selo WKF Utilizado para Kumite.</h4>
+            <span>R$ 349,77</span>
+            <a href="{{ url_for('produto', id=20) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="esportes">
+        <img src="{{ url_for('static', filename='img/produtos/chuteira.jpg') }}">
+        <div>
+            <h1>Chuteira Nike Phantom GX II Pro Campo</h1>
+            <h4>
+                Termine o trabalho na Phantom GX 2 Pro. Leve suas habilidades para o próximo nível.
+            </h4>
+            <span>R$ 1139,99</span>
+            <a href="{{ url_for('produto', id=21) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!--VESTUARIO-->
+
+    <div class="produto" data-category="vestuario">
+        <img src="{{ url_for('static', filename='img/produtos/meia.jpg') }}">
+        <div>
+            <h1>Meia Nike Everyday</h1>
+            <h4>Treine com a meia de treino com amortecimento Nike Everyday.</h4>
+            <span>R$ 75,99 </span>
+            <a href="{{ url_for('produto', id=22) }}">
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <div class="produto" data-category="vestuario">
+        <img src="{{ url_for('static', filename='img/produtos/meia2.jpg') }}">        <div>
+            <h1>Meia Nike Court</h1>
+            <h4>A Meia NikeCourt Multiplier Cushioned proporciona conforto de nível superior.
+            </h4>
+            <span>R$ 142,49</span>
+            <a href="{{ url_for('produto', id=23)}}"
+                <div class="btn-catalogo">
+                    <button class="btn">Comprar</button>
+            </a>
+        </div>
+    </div>
+    </div>
+
+
+    </div>
+
+    <footer>
+        <div id="footer_content">
+            <div id="footer_contacts">
+
+                <img src="{{ url_for('static', filename='img/logosite/SaleExpress Name.png') }}" width="120" height="60">
+
+
+                <div id="footer_social_media">
+
+                    <a href="https://www.instagram.com/saleexpress_oficial?igsh=MXE5ZThoNjE4NnBjcw==" class="footer_link" id="instagram" style="color:#fd1d1d;">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="footer_link" id="facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+
+                    <a href="#" class="footer_link" id="whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                </div>
+
+
+            </div>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Blog</h3>
+                </li>
+
+                <li>
+                    <a href="#">Tech</a>
+                </li>
+
+                <li>
+                    <a href="#">Adventures</a>
+                </li>
+
+                <li>
+                    <a href="#">Music</a>
+                </li>
+            </ul>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Products</h3>
+                </li>
+
+                <li>
+                    <a href="#">App</a>
+                </li>
+
+                <li>
+                    <a href="#">Desktop</a>
+                </li>
+
+                <li>
+                    <a href="#">Cloud</a>
+                </li>
+            </ul>
+
+            <div id="footer_subscribe">
+                <h3>Conecte-se</h3>
+
+                <p>Enter tou email to get notified about
+                    our news solutions
+                </p>
+
+                <div id="input_group">
+                    <input type="email" id="email" placeholder="Insira seu E-mail">
+                    <button>
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="footer_copyright">
+            &#169
+            SaleExpress 2025
+        </div>
+
+    </footer>
+
+
+
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const icon = toggleBtn.querySelector('i');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('closed');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-bars');
+        });
+    </script>
+    <!--Sidebar script-->
+
+    <script> //Filtro
+        const buttons = document.querySelectorAll('.nav-btn');
+        const produtos = document.querySelectorAll('.produto');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const categoria = btn.textContent.trim().toLowerCase();
+
+                produtos.forEach(produto => {
+                    const prodCat = produto.getAttribute('data-category');
+
+                    if (categoria === "todos" || categoria === prodCat) {
+                        produto.style.display = "block";
+                    } else {
+                        produto.style.display = "none";
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+ 
+
+</body>
+<script src="{{ url_for('static', filename='js/pesquisa.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cadastrar.js') }}"></script>
+
+
+</html>

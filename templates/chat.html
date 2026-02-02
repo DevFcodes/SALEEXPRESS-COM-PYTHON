@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>SaleExpress</title>
+    <!-- Botão Submit -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send" />
+    <link rel="website icon" href="{{ url_for('static', filename='img/logosite/SaleExpress Logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+</head>
+
+<body>
+
+    
+    <section>
+
+        <!--Sidebar-->
+        <nav id="sidebar">
+            <div id="sidebar_content">
+                <!-- Caso deseje readicionar o sanduiche para fechar a sidebar
+                adiciona-lo no lugar deste <a>-->
+                <div class="voltar">
+                <a href="{{ url_for('catalogo') }}" class="voltar"><i class="fa-solid fa-arrow-left"></i>  Voltar</a>
+                </div><br>
+                <div id="user">
+                    <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px" id="user_avatar" alt="Avatar">
+                    <div id="user_infos">
+                        <span class="item-descricao">{{ nome }}</span>
+                        <span class="item-descricao">(sobrenome)</span>
+                    </div>
+                </div>
+
+                <div class="item-descricao">
+                    <div class="listaContatos">
+                        <div class="contatosPerson">
+                            Contatos
+                        </div>
+                    </div>
+                </div>
+                <ul id="side_items">
+                    <li class="side-item active">
+                        <a href=="{{ url_for('catalogo') }}"
+                            <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Um</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="#">
+                            <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Dois</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="#">
+                            <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Três</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="#">
+                           <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Quatro</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="#">
+                            <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Cinco</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="#">
+                            <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Seis</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a href="#">
+                        <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Sete</span>
+                        </a>
+                    </li>
+
+
+                    <li class="side-item">
+                        <a href="#">
+                        <img src="{{ url_for('static', filename='img/images/img12.jpg') }}"width="22px">
+                            <span class="item-descricao">Pessoa Oito</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Fim da Sidebar-->
+
+        <section class="container">
+            <section class="login">
+                <h2>Login</h2>
+                <form action="" class="login__form">
+                    <input type="text" class="login__input" placeholder="Digite seu nome" required>
+                    <button type="submit" class="login__button">Entrar</button>
+                </form>
+            </section>
+
+            <section class="chat">
+
+                <section class="chat__messages">
+
+                   <!-- <div class="message--self">Hello World!</div>
+                    <div class="message--self">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+
+                    <div class="message--other">
+                        <span class="message--sender">Arthur</span>
+                        Olá Mundo
+                    </div> -->
+
+                </section>
+
+                <form class="chat__form">
+                    <input type="text" class="chat__input" placeholder="Mensagem" required>
+                    <button type="submit" class="chat__button">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </form>
+
+            </section>
+        </section>
+
+    </section>
+
+
+
+
+
+    <!-- SCRIPT DO CHAT -->
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+    <!--Sidebar script-->
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+
+        // Guarda defensiva: só operar se o botão existir na página
+        if (toggleBtn && sidebar) {
+            const icon = toggleBtn.querySelector('i');
+
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('closed');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-bars');
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

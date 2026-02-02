@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Carrinho - Sale Express</title>
+    <link rel="website icon" href="{{ url_for('static', filename='img/logosite/SaleExpress Logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="{{ url_for('catalogo') }}" class="btn-nav">
+                <i class="fa-solid fa-arrow-left"></i>Voltar
+            </a>
+            <nav class="nav-buttons">
+                <h1>Sale Express</h1>
+            </nav>
+        </header>
+
+        <main class="content">
+            <div class="page-header">
+                <h2>Meu Carrinho</h2>
+                <span class="item-count">{{ carrinho|length }} {{ 'item' if carrinho|length == 1 else 'itens' }}</span>
+            </div>
+
+            <div class="cart-layout">
+                <div class="cart-items">
+                    {% if carrinho|length == 0 %}
+                    <div style="text-align: center; padding: 50px; color: #666;">
+                        <i class="fa-solid fa-shopping-cart" style="font-size: 80px; margin-bottom: 20px; color: #ccc;"></i>
+                        <h3>Seu carrinho está vazio</h3>
+                        <p>Adicione produtos para começar suas compras!</p>
+                        <a href="{{ url_for('catalogo') }}">
+                            <button style="margin-top: 20px; padding: 10px 30px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                                Ir para o Catálogo
+                            </button>
+                        </a>
+                    </div>
+                    {% else %}
+                        {% for item in carrinho %}
+                        <div class="cart-item">
+                            <div class="item-checkbox">
+                                <input type="checkbox" checked>
+                            </div>
+                            <img src="{{ url_for('static', filename='img/produtos/' + item.imagem) }}" height="80px" width="80px" alt="{{ item.nome }}">
+                            <div class="item-details">
+                                <h3>{{ item.nome }}</h3>
+                                <p class="item-specs">Produto único</p>
+                                <p class="seller">Vendido por: Sale Express</p>
+                                <div class="item-actions">
+                                    <button class="action-btn">Favoritar</button>
+                                    <a href="{{ url_for('remover_carrinho', produto_id=item.id) }}" style="text-decoration: none;">
+                                        <button class="action-btn remove-btn">Remover</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="item-price">
+                                <div class="current-price">R$ {{ "%.2f"|format(item.preco * item.qtd) }}</div>
+                            </div>
+                            <div class="quantity-section">
+                                <div class="quantity-controls">
+                                    <a href="{{ url_for('atualizar_quantidade', produto_id=item.id, acao='diminuir') }}">
+                                        <button class="quantity-btn">-</button>
+                                    </a>
+                                    <input type="number" value="{{ item.qtd }}" min="1" class="quantity-input" readonly>
+                                    <a href="{{ url_for('atualizar_quantidade', produto_id=item.id, acao='aumentar') }}">
+                                        <button class="quantity-btn">+</button>
+                                    </a>
+                                </div>
+                                <div class="stock-status">10 disponíveis</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="cart-sidebar">
+                    <div class="summary-section">
+                        <h3>Resumo do Pedido</h3>
+                        <div class="summary-row">
+                            <span>Itens selecionados ({{ carrinho|length }}):</span>
+                            <span>R$ {{ "%.2f"|format(total) }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Frete:</span>
+                            <span class="shipping-free">Grátis</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span>R$ {{ "%.2f"|format(total) }}</span>
+                        </div>
+
+                        <div class="payment-methods">
+                            <h4>Formas de Pagamento</h4>
+                            <div class="payment-option">
+                                <strong>PIX (5% desconto):</strong>
+                                <span>R$ {{ "%.2f"|format(total * 0.95) }}</span>
+                            </div>
+                            <div class="payment-option">
+                                <strong>12x sem juros:</strong>
+                                <span>R$ {{ "%.2f"|format(total / 12) }}/mês</span>
+                            </div>
+                        </div>
+
+                        <button class="checkout-btn">Finalizar Compra</button>
+                        <a style="text-decoration: none;" href="{{ url_for('catalogo') }}">
+                            <button class="continue-shopping">← Continuar Comprando</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

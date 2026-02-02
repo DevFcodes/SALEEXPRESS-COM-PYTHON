@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="website icon" href="{{ url_for('static', filename='img/logosite/SaleExpress Logo.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Configurações - SaleExpress</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2b2b2b;
+            color: #fff;
+            padding: 40px;
+            margin: 0;
+        }
+
+        p {
+            padding: 20px;
+        }
+
+        .titulo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .titulo i {
+            font-size: 32px;
+        }
+
+        .titulo h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: #1e90ff;
+            margin: 10px 0 40px 0;
+        }
+
+        h1 {
+            color: var(--white);
+        }
+
+        .container-principal {
+            display: flex;
+            gap: 80px;
+        }
+
+        .config,
+        .lado-direito {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .linha-vertical {
+            width: 2px;
+            background: #1e90ff;
+            height: auto;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        input {
+            border: 2px solid var(--dark-b);
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .input:hover {
+            border: 2px solid #1E90FF;
+        }
+
+        input:focus {
+            border: 2px solid #1E90FF;
+        }
+
+        .nome,
+        .email,
+        .number,
+        .endereco,
+        .cep {
+            transition: border 0.3s ease;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .nome:hover,
+        .email:hover,
+        .number:hover,
+        .endereco:hover,
+        .cep:hover {
+            border: 2px solid #1E90FF;
+        }
+
+        .nome:focus,
+        .email:focus,
+        .number:focus,
+        .endereco:focus,
+        .cep:focus {
+            border: 2px solid #1E90FF;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        select {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #1e90ff;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #0044aa;
+        }
+
+        #mostraNome {
+            display: flex;
+            align-items: center;
+        }
+
+        footer {
+            background-color: #000;
+            color: var(--white);
+            padding: 40px 20px 15px;
+            transition: margin-left 0.3s ease;
+            margin-top: 50px;
+            margin-left: -40px;
+            margin-right: -40px;
+            margin-bottom: -60px;
+            width: calc(100% + 40px);
+        }
+
+        #footer_content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #footer_contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #footer_contacts img {
+            padding-bottom: 15px;
+        }
+
+        #footer_social_media {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer_link:hover {
+            transition: 0.8s;
+            transform: translateY(-3px);
+        }
+
+        #instagram {
+            color: #E4405F !important;
+        }
+
+        #facebook {
+            color: #1877F2 !important;
+        }
+
+        #whatsapp {
+            color: #25D366 !important;
+        }
+
+        .footer_link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 20px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .footer-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-list a:hover {
+            color: var(--blue);
+        }
+
+        #footer_subscribe {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #footer_subscribe h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        #footer_subscribe p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        #input_group {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #input_group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            background: transparent;
+            color: var(--white);
+            font-size: 14px;
+            outline: none;
+        }
+
+        #input_group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        #input_group>button {
+            padding: 12px 15px;
+            border: none;
+            background-color: var(--blue);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #input_group button:hover {
+            background-color: var(--blue1);
+        }
+
+        #footer_copyright {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        :root {
+            --blue: #1e90ff;
+            --blue1: #0044aa;
+        }
+
+        :root {
+            --white: #fff;
+            --gray-body: #f0f2f5;
+            --dark: #000;
+            --dark-b: #555;
+            --dark-pes: #353b48;
+            --dark-b1: #333;
+            --red-logoy: #f44336;
+            --red-logoy1: #d32f2f;
+            --green-actv: #1E90FF;
+            --green-nactv: #e3e9f7;
+            --white-side: #DCDCDC;
+            --blue: #00BFFF;
+            --blue1: #1E90FF;
+            --text-b: #000;
+            --box-gray: rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --white: #1C1C1C;
+            --dark: #fff;
+            --text-b: #fff;
+            --gray-body: #2a2a2a;
+            --dark-b: #808080;
+            --dark-pes: #4a4a4a;
+            --dark-div: #444;
+            --box-gray: rgba(255, 255, 255, 0.1);
+            --white-side: #3a3a3a;
+            --dark-b1: #555;
+            --green-actv: #4fd64f;
+        }
+
+        .dark {
+            background-color: #333333;
+            color: #fff;
+        }
+
+        .claro {
+            background: #f2f2f2;
+            color: var(--white);
+        }
+
+        .modos button {
+            background: none;
+            border: 2px solid var(--dark-b);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            width: 80px;
+            border-radius: 50px;
+            transition: border 0.3s ease;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        .modoEscuro,
+        .modoClaro {
+            transition: border 0.3s ease;
+        }
+
+        .modoEscuro:hover,
+        .modoClaro:hover {
+            border: 2px solid #1e90ff;
+        }
+
+        .voltar {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ url_for('catalogo') }}" class="voltar"><i class="fa-solid fa-arrow-left"></i>Voltar</a>
+    <div class="titulo">
+
+        <i class="fa-solid fa-gear"></i>
+        <h1 id="titulo">Configurações</h1>
+
+    </div>
+    <hr>
+
+    <div class="container-principal">
+
+        <form action="/config/editar" method="POST"> <!-- ← corrigido -->
+
+            <label>
+                <h3>Nome</h3>
+                <input class="nome" type="text" name="nome" value="{{ nome }}">
+            </label>
+
+            <label>
+                <h3>Endereço</h3>
+                <input class="endereco" type="text" name="endereco" value="{{ endereco }}">
+            </label>
+
+            <label>
+                <h3>Email</h3>
+                <input class="email" type="email" name="email" value="{{ email }}">
+            </label>
+
+            <button type="submit" style="
+        padding: 12px;
+        border-radius: 5px;
+        border: none;
+        background: #1e90ff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    ">
+                Salvar alterações
+            </button>
+
+        </form>
+
+
+        <div class="linha-vertical"></div>
+
+        <form class="lado-direito" action="/config/editar" method="POST"> <!-- ← corrigido -->
+
+
+            <label>
+                <h3>CEP</h3>
+                <input class="cep" type="text" name="cep" placeholder="00000-000"> <!-- ← adicionei name -->
+            </label>
+
+            <label>
+                <h3>Formas de pagamento</h3>
+                <select name="pagamento" id="pagamento">
+                    <option value="1">Pix</option>
+                    <option value="2">Boleto</option>
+                    <option value="3">Crédito</option>
+                </select>
+            </label>
+
+            <button type="submit" style="
+        padding: 12px;
+        border-radius: 5px;
+        border: none;
+        background: #1e90ff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    ">
+                Salvar alterações
+            </button>
+
+        </form>
+
+
+    </div>
+
+    <hr>
+
+    <div class="layout">
+        <h1 id="titulo">Layout</h1>
+        <div class="titulo2">
+            <h3>Modo de exibição</h3>
+        </div>
+
+        <div class="modos">
+            <button class="modoClaro">
+                <h4 id="claro" onclick="modeClaro()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-brightness-high" viewBox="0 0 16 16">
+                        <path
+                            d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                    </svg>
+                    Claro
+
+                </h4>
+            </button>
+
+            <h4 id="escuro" onclick="modeDark()">
+                <button class="modoEscuro">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-moon-stars" viewBox="0 0 16 16">
+                        <path
+                            d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
+                        <path
+                            d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+                    </svg>
+                    Escuro
+
+            </h4>
+            </button>
+        </div>
+
+    </div>
+
+
+
+    <hr>
+
+
+    <footer>
+        <div id="footer_content">
+            <div id="footer_contacts">
+
+                <img src="{{ url_for('static', filename='img/logosite/SaleExpress Name.png') }}" width="120" height="60">
+
+
+                <div id="footer_social_media">
+
+                    <a href="https://www.instagram.com/saleexpress_oficial?igsh=MXE5ZThoNjE4NnBjcw=="
+                        class="footer_link" id="instagram" style="color:#fd1d1d;">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="footer_link" id="facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+
+                    <a href="#" class="footer_link" id="whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                </div>
+
+
+            </div>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Blog</h3>
+                </li>
+
+                <li>
+                    <a href="#">Tech</a>
+                </li>
+
+                <li>
+                    <a href="#">Adventures</a>
+                </li>
+
+                <li>
+                    <a href="#">Music</a>
+                </li>
+            </ul>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Products</h3>
+                </li>
+
+                <li>
+                    <a href="#">App</a>
+                </li>
+
+                <li>
+                    <a href="#">Desktop</a>
+                </li>
+
+                <li>
+                    <a href="#">Cloud</a>
+                </li>
+            </ul>
+
+            <div id="footer_subscribe">
+                <h3>Conecte-se</h3>
+
+                <p>Enter tou email to get notified about
+                    our news solutions
+                </p>
+
+                <div id="input_group">
+                    <input type="email" id="email" placeholder="Insira seu E-mail">
+                    <button>
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="footer_copyright">
+            &#169
+            SaleExpress 2025
+        </div>
+
+    </footer>
+
+    <script>
+
+        let dark = document.getElementById('escuro')
+        let claro = document.getElementById('claro')
+        let titulo = document.getElementById('titulo')
+
+        function modeDark() {
+            document.body.classList.add('dark')
+            document.body.classList.remove('claro')
+
+        }
+
+        function modeClaro() {
+            document.body.classList.add('claro')
+            document.body.classList.remove('dark')
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

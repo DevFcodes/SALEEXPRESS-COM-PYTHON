@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaleExpres</title>
+    <link rel="website icon" href="{{ url_for('static', filename='img/logosite/SaleExpress Logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+</head>
+
+    <section>
+        <header>
+                <h1>Informações Pessoais</h1>
+        </header>
+        <div class="container">
+            <div class="info">
+                <p><strong>Nome:</strong>{{ nome }}</p>
+                <p><strong>Data nasc.:</strong>{{ data }}</p>
+                <p><strong>Email:</strong>{{ email }}</p>
+                <p><strong>Endereço:</strong>{{ endereco }}</p>
+            </div>
+            <div class="info2">
+                <p><strong>Forma de pagamento:</strong> Pix,cartao etc.</p>
+                <p><strong>Número de telefone:</strong> +55 11 00000000</p>
+                <p><strong>Gênero:</strong> Masculino/Feminino</p>
+            </div>
+        </div>
+        <div class="button">
+            <a href="{{ url_for('catalogo') }}""><button>Voltar</button></a>
+        </div>
+</div>
+</section>
+
+</html>

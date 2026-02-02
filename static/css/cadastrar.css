@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1e1f20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #0E0E0E;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    padding: 40px 35px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border: 2px solid #29b6f6;
+    height: 590px;
+}
+
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #f2f2f2;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #29b6f6;
+
+}
+
+.informacoes {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+p.login-text {
+    color: white;
+}
+
+a {
+    color: #29b6f6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.login-text {
+    margin-bottom: 25px;
+    color: var(--white);
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 14px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.05);
+    transition: border 0.1s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    outline: 2px solid #1E90FF
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover {
+    outline: 2px solid #1E90FF
+}
+
+button {
+    padding: 14px;
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    background-color: #29b6f6;
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cadastro-por {
+    margin-top: 20px;
+    color: var(--white);
+}
+
+.icons {
+    background-color: var(--white);
+    align-items: center;
+    display: flex;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 4px 4px 4px;
+}
+
+.linkGoogle {
+    color: var(--dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+
+
+
+
+.containerDois {
+    background-color: #0E0E0E;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    padding: 40px 35px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border: 2px solid #29b6f6;
+    height: 590px;
+    display: none;
+}
+
+.lembrar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    align-items: center;
+    color: #f2f2f2;
+}
+
+.lembrar input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.lembrar label {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.confirmar {
+    color: var(--white);
+}
+
+input[type="email"],
+input[type="password"] {
+    transition: border 0.1s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: 2px solid #1E90FF
+}
+
+input[type="email"]:hover,
+input[type="password"]:hover {
+    outline: 2px solid #1E90FF
+}
+
+
+
+
+
+
+
+:root {
+    --white: #fff;
+    --gray-body: #f0f2f5;
+    --dark: #000;
+    --dark-b: #555;
+    --dark-pes: #353b48;
+    --dark-b1: #333;
+    --red-logoy: #f44336;
+    --red-logoy1: #d32f2f;
+    --green-actv: #1E90FF;
+    --green-nactv: #e3e9f7;
+    --white-side: #DCDCDC;
+    --blue: #00BFFF;
+    --blue1: #1E90FF;
+    --text-b: #000;
+    --box-gray: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] {
+    --white: #1C1C1C;
+    --dark: #fff;
+    --text-b: #fff;
+    --gray-body: #2a2a2a;
+    --dark-b: #808080;
+    --dark-pes: #4a4a4a;
+    --dark-div: #444;
+    --box-gray: rgba(255, 255, 255, 0.1);
+    --white-side: #3a3a3a;
+    --dark-b1: #555;
+    --green-actv: #4fd64f;
+}
+
+
+/* Responsivo */
+@media (max-width: 500px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .icons {
+        gap: 15px;
+        font-size: 24px;
+    }
+}
