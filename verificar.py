@@ -6,7 +6,7 @@ DB_NAME = "usuarios.db"
 con = sqlite3.connect(DB_NAME)
 cursor = con.cursor()
 
-# Verifica se a tabela existe
+
 cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='produtos'")
 tabela_existe = cursor.fetchone()
 
@@ -15,7 +15,7 @@ if not tabela_existe:
 else:
     print("Tabela 'produtos' existe")
     
-    # Lista os produtos
+    
     cursor.execute("SELECT id, nome, preco FROM produtos")
     produtos = cursor.fetchall()
     

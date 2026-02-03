@@ -1,31 +1,63 @@
-SaleExpress
-Sistema web desenvolvido com Flask para cadastro e login de usuários.
+# 🚀 SaleExpress
 
-📌 Funcionalidades
-Cadastro de usuários
-Login com senha criptografada (hash)
-Listagem de usuários
-Edição e exclusão de usuários
-Sessão de login
-🛠 Tecnologias utilizadas
-Python
-Flask
-SQLite
-HTML5
-CSS3
-🔐 Segurança
-Senhas armazenadas utilizando hash (werkzeug.security)
-Verificação segura no login com check_password_hash
-Uso de session para controle de autenticação
-▶️ Como executar o projeto
-Clone o repositório
-Instale as dependências:
+Sistema web desenvolvido em **Flask** para gerenciamento de usuários, com autenticação segura e controle de sessão.
+
+---
+
+## 📌 Funcionalidades
+
+- ✅ Cadastro de usuários  
+- 🔐 Login com senha criptografada  
+- ✏️ Edição de dados do usuário  
+- 🗑️ Exclusão de usuários ( em andamento ) 
+- 🔒 Controle de sessão ( login/logout )
+- 🛒 Carrinho funcional
+
+
+---
+
+## 🛠 Tecnologias Utilizadas
+
+- Python  
+- Flask  
+- SQLite
+- HTML5  
+- CSS3  
+- Javascript
+
+---
+
+## 🔐 Segurança
+
+- Senhas armazenadas utilizando **hash** (`werkzeug.security`)
+- Verificação segura no login com `check_password_hash`
+- Uso de `session` para controle de autenticação e rotas protegidas
+
+---
+
+## ▶️ Como Executar o Projeto
+
+### 1️⃣ Clone o repositório
+```bash
+git clone https://github.com/DevFcodes/saleexpress.git
+
+2️⃣ Crie e ative o ambiente virtual
+python -m venv venv
+venv\Scripts\Activate
+
+3️⃣ Instale as dependências
 pip install flask
-▶️ Como executar o projeto pt 2
-No terminal digite:
+
+▶️ Executando a Aplicação
+
+No terminal, execute:
 
 python app.py
-▶️ Acesse no navegador
-http://127.0.0.1:5000
-👨‍💻 Autor Projeto desenvolvido por Fabricio Curso: Desenvolvimento de Sistemas – ETEC
 
+🌐 Acesse no Navegador
+http://127.0.0.1:5000
+
+👨‍💻 Autor
+
+Fabricio
+Curso: Desenvolvimento de Sistemas – ETEC
