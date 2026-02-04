@@ -1,20 +1,27 @@
-
 import sqlite3
+import os
 
-DB_NAME = "usuarios.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_NAME = os.path.join(BASE_DIR, "usuarios.db")
+
+print("SEED RODANDO")
 
 con = sqlite3.connect(DB_NAME)
 cursor = con.cursor()
 
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS produtos(
-       id INTEGER PRIMARY KEY AUTOINCREMENT,
-       nome TEXT NOT NULL,
-       descricao TEXT NOT NULL,
-       preco REAL NOT NULL,
-       imagem TEXT NOT NULL 
-    )
+CREATE TABLE IF NOT EXISTS produtos(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    descricao TEXT NOT NULL,
+    preco REAL NOT NULL,
+    imagem TEXT NOT NULL
+)
 """)
+
+cursor.execute("DELETE FROM produtos")
+cursor.execute("DELETE FROM sqlite_sequence WHERE name='produtos'")
+
 
 cursor.execute("""
     INSERT INTO produtos (nome, descricao, preco, imagem) VALUES
@@ -44,6 +51,6 @@ cursor.execute("""
 """)
 
 con.commit()
-con.close() 
+con.close()
 
-##print("Tabela 'produtos' criada e dados inseridos com sucesso!")
+print("SEED FINALIZADO")

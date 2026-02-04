@@ -232,6 +232,7 @@ def editar_config():
     nome = request.form.get("nome")
     email = request.form.get("email")
     endereco = request.form.get("endereco")
+    data = request.form.get("data")
     
     if not nome:
         flash ("O nome não pode ficar vazio")
@@ -243,10 +244,10 @@ def editar_config():
     cursor.execute(
         """
         UPDATE usuarios
-        SET nome = ?, email = ?, endereco = ?
+        SET nome = ?, email = ?, endereco = ?, data = ?
         WHERE id = ?
         """,
-        (nome, email, endereco, session["usuarios_id"])
+        (nome, email, endereco, data,  session["usuarios_id"])
     )
 
     con.commit()
@@ -256,6 +257,7 @@ def editar_config():
     session["usuarios_nome"] = nome
     session["usuarios_email"] = email
     session["usuarios_end"] = endereco
+    session["usuarios_data"] = data
 
     flash("Dados atualizados com sucesso!")
     return redirect("/config")
@@ -435,6 +437,28 @@ def chat():
         nome=usuario[0]
     )
 
+@app.route("/vender_produto", methods=["GET", "POST"])
+def vender():
+    if "usuarios_id" not in session:
+        return("/login")
+    
+    if request.method =="POST":
+        nome = request.form["nome"]
+        preco = request.form["preco"]
+        img = request.form["imagem"]
+
+        con = sqlite3.connect(DB_NAME)
+        cursor = con.cursor()
+        cursor.execute("""
+            INSERT INTO produto (nome, preco, img)VALUES (?, ?, ?)
+        """, (nome, preco, img))
+        con.commit()
+        con.close()
+
+        flash("Produto cadastrado com sucesso")
+        return redirect("/catalogo")
+    
+    return render_template("vender.html")
 
 
 if __name__ == "__main__":
