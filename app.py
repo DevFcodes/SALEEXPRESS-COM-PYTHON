@@ -1,5 +1,6 @@
 
 import sqlite3
+import os
 from flask import Flask, render_template, request, redirect, session, flash, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -462,4 +463,7 @@ def vender():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
