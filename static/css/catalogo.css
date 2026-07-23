@@ -11,6 +11,10 @@ body {
   background-color: var(--gray-body);
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 
 .notifi {
   position: fixed;
@@ -795,8 +799,8 @@ footer {
   }
 
   /* Navbar acompanha a sidebar recolhida */
-  #navbar {
-    left: 70px;
+ #navbar {
+    padding: 15px 15px; /* reduz o respiro lateral */
   }
 
   /* Conteúdo principal (catálogo, banner etc.) */
@@ -821,6 +825,12 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px;
+    gap: 6px;
+  }
+
+   .nav-btn {
+    padding: 8px 14px;
+    font-size: 13px;
   }
 
   /* Footer em mobile: ignora completamente a sidebar e ocupa 100% */
@@ -942,7 +952,12 @@ footer {
   .produto img {
     height: 250px;
   }
+
+  .nav-btn {
+    padding: 6px 12px;
+    font-size: 12px;
 }
+
  /*banner*/
 @keyframes scroll {
   from {
@@ -951,4 +966,5 @@ footer {
   to {
       transform: translateX(-100%);
   }
+}
 }
