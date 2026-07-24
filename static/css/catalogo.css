@@ -245,13 +245,13 @@ hr {
 
 /*----- AJUSTE DO BANNER COM A SIDEBAR -----*/
 #sidebar.closed~#banner {
-  width: calc(100% - 250px);
-  margin-left: 250px;
+  width: calc(100% - 70px);
+  margin-left: 70px;
 }
 
 #sidebar~#banner {
   width: calc(100% - 250px);
-  margin-left: 245px;
+  margin-left: 250px;
 }
 
 /* Quando a sidebar está fechada (70px) */
@@ -798,16 +798,25 @@ footer {
     width: 250px;
   }
 
-  /* Navbar acompanha a sidebar recolhida */
- #navbar {
+  /* Navbar deixa de ser "fixed" no mobile: some o problema de margin-top
+     "adivinhado" pra compensar a altura dele, porque ele passa a empurrar
+     o conteúdo abaixo de forma natural, no fluxo normal da página. */
+  #navbar {
+    position: static;
+    left: auto;
     padding: 15px 15px; /* reduz o respiro lateral */
   }
 
-  /* Conteúdo principal (catálogo, banner etc.) */
-  .container-filho,
-  .carrosel {
+  /* Banner escondido no mobile: prioriza os produtos na tela pequena
+     e evita qualquer sobreposição com os filtros/navbar. */
+  #banner {
+    display: none;
+  }
+
+  /* Conteúdo principal (catálogo) */
+  .container-filho {
     margin-left: 70px !important;
-    margin-top: 170px;
+    margin-top: 20px; /* não precisa mais calcular altura de navbar/banner */
   }
 
   /* Ajustes da navbar mobile */
@@ -822,13 +831,15 @@ footer {
   }
 
   .btn-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
     gap: 6px;
+    padding-bottom: 4px;
   }
 
-   .nav-btn {
+  .nav-btn {
+    flex-shrink: 0;
     padding: 8px 14px;
     font-size: 13px;
   }
@@ -884,11 +895,6 @@ footer {
     padding: 15px;
   }
 
-  .carrosel {
-    height: 250px;
-    margin: 150px auto 20px;
-  }
-
 }
 
 /* Desktop grande */
@@ -926,7 +932,6 @@ footer {
     margin-left: 70px !important;
     padding: 15px;
     gap: 15px;
-    margin-top: 170px;
   }
   
   .produto img {
@@ -956,15 +961,5 @@ footer {
   .nav-btn {
     padding: 6px 12px;
     font-size: 12px;
-}
-
- /*banner*/
-@keyframes scroll {
-  from {
-      transform: translateX(0);
   }
-  to {
-      transform: translateX(-100%);
-  }
-}
 }
