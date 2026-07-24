@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ produto.nome }}</title>
+    <style>
+        /* Reset e corpo */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1e1f20;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            color: #f0f2f5;
+        }
+
+        .container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Colunas */
+        .produto-coluna-esquerda {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        .produto-coluna-direita {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        /* Imagem do produto */
+        .imagem-produto img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* Título e preço */
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #28a745;
+            margin: 10px 0;
+        }
+
+        /* Avaliações */
+        .avaliações {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            font-size: 24px;
+            color: #ddd;
+        }
+
+        .rating label:before {
+            content: '★';
+        }
+
+        .rating input:checked~label,
+        .rating label:hover,
+        .rating label:hover~label {
+            color: #ffc107;
+        }
+
+        .avaliacao-texto {
+            margin-left: 10px;
+            font-size: 0.9rem;
+            color: #f0f2f5;
+        }
+
+        /* Descrição */
+        p {
+            margin: 20px 0;
+            line-height: 1.6;
+            color: #f0f2f5;
+        }
+
+        /* Especificações */
+        .especificacoes {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            border-radius: 12px;
+            padding: 15px;
+            background: #555;
+            margin: 20px 0;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6d79c9;
+        }
+
+        .spec-item span {
+            color: #fff;
+        }
+
+        .spec-item i {
+            font-size: 1.2rem;
+        }
+
+        /* Tamanhos */
+        #container-tamanhos {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #container-tamanhos button {
+            font: normal 16px Arial;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        #container-tamanhos button:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        /* Quantidade */
+        .quantidade {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .quantidade button {
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .quantidade button:hover {
+            background-color: #444;
+        }
+
+        .quantidade input {
+            width: 50px;
+            text-align: center;
+            font-size: 18px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        /* Botões principais */
+        .botoes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .botoes .btn {
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 50%;
+        }
+
+        .btn-comprar {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-comprar:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-carrinho {
+            background-color: #ef9c16;
+            color: #fff;
+        }
+
+        .btn-carrinho:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-ver {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-ver:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Voltar */
+        .voltar {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <a class="voltar" href="{{ url_for('catalogo') }}">← Voltar</a>
+
+    <div class="container">
+        <div class="produto-coluna-esquerda imagem-produto">
+            <img src="{{ url_for('static', filename='img/produtos/' + produto.imagem) }}" alt="{{ produto.nome }}">
+        </div>
+
+        <div class="produto-coluna-direita produto">
+            <h1 id="produto-nome">{{ produto.nome }}</h1>
+            <h2 id="produto-preco" data-preco="{{ produto.preco }}">R$ {{ "%.2f"|format(produto.preco) }}</h2>
+
+            <div class="avaliações">
+                <div class="rating">
+                    <input type="radio" name="star" id="star1"><label for="star1"></label>
+                    <input type="radio" name="star" id="star2"><label for="star2"></label>
+                    <input type="radio" name="star" id="star3" checked><label for="star3"></label>
+                    <input type="radio" name="star" id="star4"><label for="star4"></label>
+                    <input type="radio" name="star" id="star5"><label for="star5"></label>
+                </div>
+                <span class="avaliacao-texto">(4.8 - 127 avaliações)</span>
+            </div>
+
+            <p>{{ produto.descricao }}</p>
+
+            <div class="especificacoes">
+                <div class="spec-item"><i class="fas fa-bicycle"></i><span>Excelente para esportes</span></div>
+                <div class="spec-item"><i class="fas fa-running"></i><span>Seu mundo da corrida</span></div>
+                <div class="spec-item"><i class="fas fa-shoe-prints"></i><span>Amortecimento macio</span></div>
+            </div>
+
+            <div id="container-tamanhos"></div>
+
+            <div class="quantidade">
+                <button class="menos">-</button>
+                <input type="text" id="qtd" value="1" readonly>
+                <button class="mais">+</button>
+            </div>
+
+            <div class="botoes">
+                <button class="btn btn-comprar">Comprar Agora</button>
+                <!-- ADICIONAR AO CARRINHO - CORRIGIDO -->
+                <form action="{{ url_for('add_carrinho', produto_id=produto.id) }}" method="POST"
+                    style="display: inline;">
+                    <button type="submit" class="btn btn-carrinho">Adicionar ao carrinho</button>
+                </form>
+
+                <!-- VER CARRINHO -->
+                <a style="text-decoration: none;" href="{{ url_for('carrinho') }}">
+                    <button type="button" class="btn btn-ver">Ver Carrinho</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Seleção de tamanhos
+        const container = document.getElementById('container-tamanhos');
+        let tamanhoSelecionado = null;
+
+        for (let i = 36; i <= 45; i++) {
+            const botao = document.createElement('button');
+            botao.innerText = i;
+            botao.classList.add('tamanho');
+            botao.dataset.tamanho = i;
+
+            botao.addEventListener('click', function () {
+                document.querySelectorAll('.tamanho').forEach(b => {
+                    b.style.background = '#333';
+                    b.style.color = '#fff';
+                });
+
+                this.style.background = 'black';
+                this.style.color = 'white';
+                tamanhoSelecionado = this.dataset.tamanho;
+            });
+
+            container.appendChild(botao);
+        }
+
+        // Controle de quantidade
+        const menos = document.querySelector(".menos");
+        const mais = document.querySelector(".mais");
+        const qtd = document.getElementById("qtd");
+
+        mais.addEventListener("click", () => {
+            qtd.value = parseInt(qtd.value) + 1;
+        });
+
+        menos.addEventListener("click", () => {
+            if (parseInt(qtd.value) > 1) {
+                qtd.value = parseInt(qtd.value) - 1;
+            }
+        });
+
+        // Função para adicionar ao carrinho
+        document.querySelector(".btn-carrinho").addEventListener('click', function () {
+            if (!tamanhoSelecionado) {
+                alert('Por favor, selecione um tamanho!');
+                return;
+            }
+
+            const produtoObj = {
+                id: 'tenis-nike-rev7-' + tamanhoSelecionado,
+                nome: document.getElementById('produto-nome').textContent,
+                preco: parseFloat(document.getElementById('produto-preco').dataset.preco),
+                quantidade: parseInt(qtd.value),
+                tamanho: tamanhoSelecionado
+            };
+
+            alert('Produto adicionado ao carrinho!\nTamanho: ' + tamanhoSelecionado + '\nQuantidade: ' + qtd.value);
+            console.log('Produto adicionado:', produtoObj);
+        });
+    </script>
+</body>
+
+</html>

@@ -318,6 +318,35 @@ def produto(id):
         "produto.html",
         produto=produto_dict  
     )
+
+@app.route("/produtoTipoDois/<int:id>")
+def produtoTipoDois(id):
+    if "usuarios_id" not in session:
+        return redirect("/login")
+
+    con = sqlite3.connect(DB_NAME)
+    cursor = con.cursor()
+    cursor.execute("""
+        SELECT id, nome, descricao, preco, imagem
+        FROM produtos
+        WHERE id = ?
+    """, (id,))
+    produto = cursor.fetchone()
+    con.close()
+
+    if not produto:
+        flash("Produto não encontrado")
+        return redirect("/catalogo")
+
+    produto_dict = {
+        'id': produto[0],
+        'nome': produto[1],
+        'descricao': produto[2],
+        'preco': produto[3],
+        'imagem': produto[4]
+    }
+
+    return render_template("produtoTipoDois.html", produto=produto_dict)
     
 @app.route("/add_carrinho/<int:produto_id>", methods=["POST", "GET"])
 def add_carrinho(produto_id):
