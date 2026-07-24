@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ produto.nome }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* Reset e corpo */
         * {
             margin: 0;
             padding: 0;
@@ -15,59 +15,108 @@
         }
 
         body {
-            background-color: #1e1f20;
+            background-color: #fff;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             padding: 40px 20px;
-            color: #f0f2f5;
         }
 
         .container {
             display: flex;
+            align-items: flex-start;
             gap: 50px;
             flex-wrap: wrap;
-            max-width: 1200px;
+            max-width: 1100px;
             width: 100%;
         }
 
-        /* Colunas */
-        .produto-coluna-esquerda {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
+        .imgProduto {
+            flex: 1 1 380px;
+            max-width: 420px;
         }
 
-        .produto-coluna-direita {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        /* Imagem do produto */
-        .imagem-produto img {
+        .imgProduto img {
             width: 100%;
+            display: block;
             border-radius: 12px;
+            border: 1px solid #eee;
         }
 
-        /* Título e preço */
-        h1 {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 10px;
+        h2,
+        h3,
+        h4,
+        h6,
+        p,
+        span {
+            color: black;
         }
 
-        h2 {
-            font-size: 1.8rem;
+        .nomeProduto {
+            flex: 1 1 420px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+                "nome   nome"
+                "aval   aval"
+                "preco  preco"
+                "card   card"
+                "specs  specs"
+                "qtd    botoes";
+            row-gap: 20px;
+            column-gap: 15px;
+            align-items: start;
+        }
+
+        .nomeProduto h2 {
+            grid-area: nome;
+            font-size: 26px;
+        }
+
+        .preco {
+            grid-area: preco;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .prcAntigo {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 13px;
+        }
+
+        .prcAtual {
+            color: #ff5a00;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .desconto {
+            background: #ff5a00;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .prcParcela {
             color: #28a745;
-            margin: 10px 0;
+        }
+
+        .parcelaQTD {
+            color: #FF4500;
         }
 
         /* Avaliações */
-        .avaliações {
+        .avaliacoes {
+            grid-area: aval;
             display: flex;
             align-items: center;
-            margin: 15px 0;
+            flex-wrap: wrap;
         }
 
         .rating {
@@ -99,77 +148,116 @@
         .avaliacao-texto {
             margin-left: 10px;
             font-size: 0.9rem;
-            color: #f0f2f5;
+            color: #000;
         }
 
-        /* Descrição */
-        p {
-            margin: 20px 0;
-            line-height: 1.6;
-            color: #f0f2f5;
+        /* Card do seletor de cor */
+        .card {
+            grid-area: card;
+            padding: 8px;
+            background-color: #FDFDFE;
+            border-radius: 5px;
+        }
+
+        .label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .label strong {
+            color: #111;
+        }
+
+        .colors {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            padding: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.08);
+        }
+
+        .color-option .swatch {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .color-option.selected {
+            border-color: #ff5c00;
+        }
+
+        .preview {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.15);
         }
 
         /* Especificações */
         .especificacoes {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
+            grid-area: specs;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 20px;
             border-radius: 12px;
             padding: 15px;
-            background: #555;
-            margin: 20px 0;
+            background: #FDFDFE;
         }
 
         .spec-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #6d79c9;
+            color: #000;
         }
 
         .spec-item span {
-            color: #fff;
+            color: #000;
+            font-size: 14px;
         }
 
         .spec-item i {
             font-size: 1.2rem;
         }
 
-        /* Tamanhos */
-        #container-tamanhos {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        #container-tamanhos button {
-            font: normal 16px Arial;
-            height: 50px;
-            border: none;
-            cursor: pointer;
-            background-color: #333;
-            color: #fff;
-            border-radius: 12px;
-            transition: 0.3s ease;
-        }
-
-        #container-tamanhos button:hover {
-            background-color: #555;
-            transform: scale(1.05);
-        }
-
         /* Quantidade */
         .quantidade {
+            grid-area: qtd;
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 30px 0;
         }
 
         .quantidade button {
-            background-color: #222;
-            color: #fff;
+            background-color: #FDFDFE;
+            color: #000;
             border: none;
             padding: 10px 15px;
             border-radius: 8px;
@@ -179,7 +267,7 @@
         }
 
         .quantidade button:hover {
-            background-color: #444;
+            background-color: #f5f5f5;
         }
 
         .quantidade input {
@@ -193,15 +281,15 @@
 
         /* Botões principais */
         .botoes {
+            grid-area: botoes;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-top: 20px;
         }
 
         .botoes .btn {
             padding: 15px 20px;
-            border-radius: 12px;
+            border-radius: 8px;
             border: none;
             font-size: 1rem;
             font-weight: bold;
@@ -211,21 +299,11 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            width: 50%;
-        }
-
-        .btn-comprar {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .btn-comprar:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+            width: 100%;
         }
 
         .btn-carrinho {
-            background-color: #ef9c16;
+            background-color: #FF4500;
             color: #fff;
         }
 
@@ -244,32 +322,64 @@
             transform: translateY(-2px);
         }
 
-        /* Voltar */
-        .voltar {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            display: inline-block;
+        .cardDescricao {
+            grid-area: card;
+            padding: 10px;
+            background-color: #FDFDFE;
+            border-radius: 5px;
+        }
+
+        .listaDescricao ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .listaDescricao li {
+            /* background-color: #e9ecef; */
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #333;
+            font-size: 14px;
+            width: 350px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        
+
+        @media (max-width: 700px) {
+            .nomeProduto {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "nome"
+                    "aval"
+                    "preco"
+                    "card"
+                    "specs"
+                    "qtd"
+                    "botoes";
+            }
         }
     </style>
 </head>
 
 <body>
 
-
     <a class="voltar" href="{{ url_for('catalogo') }}">← Voltar</a>
 
     <div class="container">
-        <div class="produto-coluna-esquerda imagem-produto">
+
+        <div class="imgProduto">
             <img src="{{ url_for('static', filename='img/produtos/' + produto.imagem) }}" alt="{{ produto.nome }}">
-        </div>
+        </div><!--img-->
 
-        <div class="produto-coluna-direita produto">
-            <h1 id="produto-nome">{{ produto.nome }}</h1>
-            <h2 id="produto-preco" data-preco="{{ produto.preco }}">R$ {{ "%.2f"|format(produto.preco) }}</h2>
+        <div class="nomeProduto">
+            <h2 id="produto-nome">{{ produto.nome }}</h2>
 
-            <div class="avaliações">
+            <div class="avaliacoes">
                 <div class="rating">
                     <input type="radio" name="star" id="star1"><label for="star1"></label>
                     <input type="radio" name="star" id="star2"><label for="star2"></label>
@@ -277,70 +387,103 @@
                     <input type="radio" name="star" id="star4"><label for="star4"></label>
                     <input type="radio" name="star" id="star5"><label for="star5"></label>
                 </div>
-                <span class="avaliacao-texto">(4.8 - 127 avaliações)</span>
-            </div>
+                <span class="avaliacao-texto">(4.8 - 127 avaliações) | 85% recomendam esse produto</span>
+            </div><!--Avaliacao-->
 
-            <p>{{ produto.descricao }}</p>
+            <div class="preco">
+                <span class="prcAtual" id="produto-preco" data-preco="{{ produto.preco }}">R$ {{
+                    "%.2f"|format(produto.preco)|replace(".", ",") }}</span>
+                <!-- Preço antigo, desconto e parcelamento: não existem no banco (produto_dict),
+                     mantidos estáticos como no arquivo original. Se quiser tornar dinâmico,
+                     adicione colunas (ex: preco_antigo) na tabela "produtos". 
+                     <span class="prcAntigo">R$ 290,90</span>
+                     <p class="desconto">7% OFF</p>
+                     -->
+
+                <!--<span class="parcela">ou <span class="parcelaQTD">10x</span> de <span class="prcParcela">R$ 22,90</span> sem juros</span>-->
+            </div><!--Prec-->
+
+            <div class="card">
+                <div class="label">Cor: <strong id="colorName">Preto</strong></div>
+
+                <div class="colors">
+                    <div class="color-option selected" data-name="Preto" data-color="#1a1a1a">
+                        <div class="swatch" style="background: #1a1a1a;"></div>
+                    </div>
+
+                    <div class="color-option" data-name="Branco" data-color="#ffffff">
+                        <div class="swatch" style="background: #ffffff;"></div>
+                    </div>
+
+                    <div class="color-option" data-name="Azul" data-color="#1e3a8a">
+                        <div class="swatch" style="background: #1e3a8a;"></div>
+                    </div>
+                </div><!--colors-->
+
+                <div class="preview">
+                    <div class="dot" id="previewDot" style="background: #1a1a1a;"></div>
+                    <span>Você selecionou: <span id="previewText">Preto</span></span>
+                </div>
+            </div><!--card-->
 
             <div class="especificacoes">
-                <div class="spec-item"><i class="fas fa-bicycle"></i><span>Excelente para esportes</span></div>
-                <div class="spec-item"><i class="fas fa-running"></i><span>Seu mundo da corrida</span></div>
-                <div class="spec-item"><i class="fas fa-shoe-prints"></i><span>Amortecimento macio</span></div>
-            </div>
-
-            <!--<div id="container-tamanhos"></div>-->
+                <div class="spec-item"><i class="fa-brands fa-bluetooth-b" style="color: #0662F4;"></i><span>Conexão
+                        rápida e estável</span>
+                </div>
+                <div class="spec-item"><i class="fa-solid fa-battery-full" style="color: #3E9239;"></i><span>Longa
+                        duração de bateria</span>
+                </div>
+                <div class="spec-item"><i class="fa-solid fa-music"></i><span>Som de alta qualidade</span></div>
+                <div class="spec-item"><i class="fa-solid fa-microphone"></i><span>Microfone integrado</span></div>
+            </div><!--especi-->
 
             <div class="quantidade">
                 <button class="menos">-</button>
                 <input type="text" id="qtd" value="1" readonly>
                 <button class="mais">+</button>
-            </div>
+            </div><!--qtd-->
 
             <div class="botoes">
-                <button class="btn btn-comprar">Comprar Agora</button>
-                <!-- ADICIONAR AO CARRINHO - CORRIGIDO -->
+                <!-- Adicionar ao carrinho: envia pro backend de verdade (rota add_carrinho já existente) -->
                 <form action="{{ url_for('add_carrinho', produto_id=produto.id) }}" method="POST"
                     style="display: inline;">
                     <button type="submit" class="btn btn-carrinho">Adicionar ao carrinho</button>
                 </form>
 
-                <!-- VER CARRINHO -->
+                <!-- Ver Carrinho -->
                 <a style="text-decoration: none;" href="{{ url_for('carrinho') }}">
                     <button type="button" class="btn btn-ver">Ver Carrinho</button>
                 </a>
+            </div><!--btn-->
+
+        </div><!--NP-->
+
+        <div class="descricao">
+            <div class="cardDescricao">
+                <p class="descricaoText">{{ produto.descricao }}</p>
+
+                <div class="listaDescricao">
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #FF5719;"></i> Design moderno e dobravel</li>
+                        <li><i class="fa-solid fa-check" style="color: #FF5719;"></i> Almofadas macias e confortaveis
+                        </li>
+                        <li><i class="fa-solid fa-check" style="color: #FF5719;"></i> Compativel com Android, iOS,
+                            Windows e mais</li>
+                        <li><i class="fa-solid fa-check" style="color: #FF5719;"></i> Inclui cabo P2 para uso com fio
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-        </div>
-    </div>
+        </div><!--decricao bbleos-->
+
+    </div><!--container-->
 
     <script>
-        // Seleção de tamanhos
-        const container = document.getElementById('container-tamanhos');
-        let tamanhoSelecionado = null;
-
-        for (let i = 36; i <= 45; i++) {
-            const botao = document.createElement('button');
-            botao.innerText = i;
-            botao.classList.add('tamanho');
-            botao.dataset.tamanho = i;
-
-            botao.addEventListener('click', function () {
-                document.querySelectorAll('.tamanho').forEach(b => {
-                    b.style.background = '#333';
-                    b.style.color = '#fff';
-                });
-
-                this.style.background = 'black';
-                this.style.color = 'white';
-                tamanhoSelecionado = this.dataset.tamanho;
-            });
-
-            container.appendChild(botao);
-        }
-
         // Controle de quantidade
-        const menos = document.querySelector(".menos");
-        const mais = document.querySelector(".mais");
-        const qtd = document.getElementById("qtd");
+        let menos = document.querySelector(".menos");
+        let mais = document.querySelector(".mais");
+        let qtd = document.getElementById("qtd");
 
         mais.addEventListener("click", () => {
             qtd.value = parseInt(qtd.value) + 1;
@@ -352,22 +495,44 @@
             }
         });
 
+        // Seletor de cor
+        let colorOptions = document.querySelectorAll('.color-option');
+        let colorName = document.getElementById('colorName');
+        let previewDot = document.getElementById('previewDot');
+        let previewText = document.getElementById('previewText');
+
+        // Cor selecionada inicial (a que já vem com a classe "selected" no HTML)
+        let corSelecionada = document.querySelector('.color-option.selected')?.dataset.name || null;
+
+        colorOptions.forEach(option => {
+            option.addEventListener("click", () => {
+                colorOptions.forEach(o => o.classList.remove("selected"));
+                option.classList.add("selected");
+
+                corSelecionada = option.dataset.name;
+
+                colorName.textContent = option.dataset.name;
+                previewText.textContent = option.dataset.name;
+                previewDot.style.background = option.dataset.color;
+            });
+        });
+
         // Função para adicionar ao carrinho
         document.querySelector(".btn-carrinho").addEventListener('click', function () {
-            if (!tamanhoSelecionado) {
-                alert('Por favor, selecione um tamanho!');
+            if (!corSelecionada) {
+                alert('Por favor, selecione uma cor!');
                 return;
             }
 
-            const produtoObj = {
-                id: 'tenis-nike-rev7-' + tamanhoSelecionado,
+            let produtoObj = {
+                id: 'headphone-soundmax-' + corSelecionada.toLowerCase(),
                 nome: document.getElementById('produto-nome').textContent,
                 preco: parseFloat(document.getElementById('produto-preco').dataset.preco),
                 quantidade: parseInt(qtd.value),
-                tamanho: tamanhoSelecionado
+                cor: corSelecionada
             };
 
-            alert('Produto adicionado ao carrinho!\nTamanho: ' + tamanhoSelecionado + '\nQuantidade: ' + qtd.value);
+            alert('Produto adicionado ao carrinho!\nCor: ' + corSelecionada + '\nQuantidade: ' + qtd.value);
             console.log('Produto adicionado:', produtoObj);
         });
     </script>

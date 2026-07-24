@@ -47,7 +47,8 @@ cursor.execute("""
     ('Kimono', 'Kimono Karatê adidas Club K220C com selo WKF Utilizado para Kumite.', 349.77, 'kimono.jpg'),
     ('Chuteira', 'Termine o trabalho na Phantom GX 2 Pro. Leve suas habilidades para o próximo nível.', 1139.99, 'chuteira.jpg'),
     ('Meia', 'Treine com a meia de treino com amortecimento Nike Everyday.', 75.99, 'meia.jpg'),
-    ('Meia2', 'A Meia NikeCourt Multiplier Cushioned proporciona conforto de nível superior.', 142.49, 'meia2.jpg')
+    ('Meia2', 'A Meia NikeCourt Multiplier Cushioned proporciona conforto de nível superior.', 142.49, 'meia2.jpg'),
+    ('Headphone', 'Confortavel e bateria de longa duração.', 269.90, 'p1.jpeg')
 """)
 
 con.commit()
