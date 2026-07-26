@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ produto.nome }}</title>
+{% block title %}{{ produto.nome }}{% endblock %}
+
+{% block extra_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tenis.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,10 +14,6 @@
         body {
             background-color: #fff;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 40px 20px;
         }
 
         .container {
@@ -30,6 +23,8 @@
             flex-wrap: wrap;
             max-width: 1100px;
             width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
         .imgProduto {
@@ -373,7 +368,6 @@
             transform: scale(1.05);
         }
 
-        
 
         @media (max-width: 700px) {
             .nomeProduto {
@@ -390,11 +384,11 @@
             }
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
+{% block content %}
 
-    <a class="voltar" href="{{ url_for('catalogo') }}">← Voltar</a>
+    <!--<a class="voltar" href="{{ url_for('catalogo') }}">← Voltar</a>-->
 
     <div class="container">
 
@@ -501,6 +495,9 @@
 
     </div><!--container-->
 
+{% endblock %}
+
+{% block extra_js %}
     <script>
         // Controle de quantidade
         let menos = document.querySelector(".menos");
@@ -590,6 +587,4 @@
             // O form envia normalmente pro backend (rota add_carrinho) depois desse ponto.
         });
     </script>
-</body>
-
-</html>
+{% endblock %}

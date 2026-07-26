@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SaleExpress{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/catalogo.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <nav>
+        <div id="navbar">
+
+        <div class="imgNav">
+            <a href="{{ url_for('catalogo') }}">
+                <img src="{{ url_for('static', filename='img/logosite/SaleExpress Name.png') }}" alt="Logo">
+            </a>
+        </div>
+
+        <div class="pesquisa">
+            <input class="pesquisa-text" type="search" placeholder="Buscar Produtos...">
+            <a class="pesquisa-btn" href="#">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+
+        <div class="iconesTopo">
+            <div class="iconUser">
+                <a href="{{ url_for('userSale') }}">
+                    <i class="fa-regular fa-circle-user"></i>
+                    Minha conta
+                </a>
+            </div>
+
+            <div class="iconFav">
+                <a href="#">
+                    <i class="fa-regular fa-heart"></i>
+                    Favoritos
+                </a>
+            </div>
+
+            <div class="iconCarrinho">
+                <a href="{{ url_for('carrinho') }}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Carrinho
+                </a>
+            </div>
+
+        </div>
+</div><!--navbar-->
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/catalogo.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
