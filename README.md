@@ -1,63 +1,108 @@
-# 🚀 SaleExpress
+# SaleExpress
 
-Sistema web desenvolvido em **Flask** para gerenciamento de usuários, com autenticação segura e controle de sessão.
+A web application built with Flask for user management and an online product catalog, featuring secure authentication, session control and a shopping cart.
 
----
+## Overview
 
-## 📌 Funcionalidades
+SaleExpress is a full-stack web project developed as part of my Systems Development course at ETEC. It covers the core flow of an online store: account creation, authentication, product browsing and cart management, using SQLite for persistence.
 
-- ✅ Cadastro de usuários  
-- 🔐 Login com senha criptografada  
-- ✏️ Edição de dados do usuário  
-- 🗑️ Exclusão de usuários ( em andamento ) 
-- 🔒 Controle de sessão ( login/logout )
-- 🛒 Carrinho funcional
+## Features
 
+- User registration
+- Login with hashed passwords
+- Edit user profile data
+- Account deletion (in progress)
+- Session-based authentication (login and logout) with protected routes
+- Product catalog
+- Working shopping cart
 
----
+## Tech Stack
 
-## 🛠 Tecnologias Utilizadas
+| Layer     | Technology             |
+|-----------|------------------------|
+| Backend   | Python, Flask          |
+| Database  | SQLite                 |
+| Frontend  | HTML5, CSS3, JavaScript|
+| Deploy    | Render                 |
 
-- Python  
-- Flask  
-- SQLite
-- HTML5  
-- CSS3  
-- Javascript
+## Security
 
----
+- Passwords are stored as hashes using `werkzeug.security`
+- Login credentials are verified with `check_password_hash`
+- Flask `session` controls authentication and protects private routes
 
-## 🔐 Segurança
+## Project Structure
 
-- Senhas armazenadas utilizando **hash** (`werkzeug.security`)
-- Verificação segura no login com `check_password_hash`
-- Uso de `session` para controle de autenticação e rotas protegidas
+```
+SALEEXPRESS-COM-PYTHON/
+├── app.py              Application entry point and routes
+├── produto.py          Product data handling
+├── templates/          HTML templates
+├── static/             CSS, JavaScript and images
+├── requirements.txt    Python dependencies
+└── README.md
+```
 
----
+## Getting Started
 
-## ▶️ Como Executar o Projeto
+### Prerequisites
 
-### 1️⃣ Clone o repositório
-```bash
-git clone https://github.com/DevFcodes/saleexpress.git
+- Python 3.9 or higher
+- pip
 
-2️⃣ Crie e ative o ambiente virtual
-python -m venv venv
-venv\Scripts\Activate
+### Installation
 
-3️⃣ Instale as dependências
-pip install flask
+1. Clone the repository:
 
-▶️ Executando a Aplicação
+   ```bash
+   git clone https://github.com/DevFcodes/SALEEXPRESS-COM-PYTHON.git
+   cd SALEEXPRESS-COM-PYTHON
+   ```
 
-No terminal, execute:
+2. Create and activate a virtual environment:
 
-python app.py
+   ```bash
+   python -m venv venv
 
-🌐 Acesse no Navegador
-http://127.0.0.1:5000
+   # Windows
+   venv\Scripts\activate
 
-👨‍💻 Autor
+   # Linux / macOS
+   source venv/bin/activate
+   ```
 
-Fabricio
-Curso: Desenvolvimento de Sistemas – ETEC
+3. Install the dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the application:
+
+   ```bash
+   python app.py
+   ```
+
+5. Open your browser at `http://127.0.0.1:5000`
+
+## Screenshots
+
+Add screenshots of the application here:
+
+```
+![Home page](docs/home.png)
+![Product catalog](docs/catalog.png)
+![Shopping cart](docs/cart.png)
+```
+
+## Roadmap
+
+- Finish the account deletion feature
+- Add a sidebar with category filters to the catalog
+- Add automated tests for authentication and cart routes
+
+## Author
+
+**Fabricio**
+GitHub: [@DevFcodes](https://github.com/DevFcodes)
+Systems Development student at ETEC Uirapuru
